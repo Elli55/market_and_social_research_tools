@@ -33,6 +33,8 @@ md <- md |> rename(q002geburt = q002geburtsjahr)
 #Mehrere Spalten umbenennen
 md <- md |> rename(v007freq_1gemuese = v007freq1_ge, v007freq_2schoko = v007freq2_ts, v007freq_3milch = v007freq3_mi)
 
+view(md['q001hheinkauf'])
+
 #Alle Spalten umbenennen, z.B in Kleinbuchstaben
 #limo |> rename_all(tolower)
 
@@ -58,6 +60,7 @@ df1 <- md |>
 df324 <- md |>
   select(v032bioanteil, Q004geschlecht) |>
   drop_na()#NA entfernen
+  
 
 #beginnt mit...
 p011 <- md |>  select(starts_with("p011")) 
@@ -80,6 +83,10 @@ md2 <- md |>
 # b010_2 <- b010 |> 
 #   select(-AX010midiff7f)
 
+?frq()
+
+??select()
+help(select())
 
 # data frame löschen   
 #  rm(md2)
@@ -107,11 +114,12 @@ u013 <- md |>
 md <- md |>  
   mutate(Q002alter = 2025 - q002geburt) #z.B. Alter berechnen
 
+
 #mutate () + umkodieren (recode()) siehe auch R-Skript Datentransformation -> weitere Beispiele
 md <- md |>
   mutate(Q002alter = 2025 - q002geburt) |>
   mutate(Q002altergru4 = car::recode(Q002alter, "18:29=1; 30:44=2; 45:59=3; 60:hi=4")) #Hinweis: Paket car wird durch den :: der Funktion zugeordnet und geladen
-
+  frq()
 
 #Datenvorbereitung: nützliche Weitere Funktionen---------------------------------------------------------------
 
